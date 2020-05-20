@@ -1,0 +1,32 @@
+#! /bin/sh
+
+## AUTO START
+
+sxhkd &
+xfce4-panel &
+feh --bg-fill ~/Pictures/wallpapers/galaxy.jpg &
+picom &
+devilspie &
+
+
+## MONITORS
+
+bspc monitor -d I II III IV V VI VII VIII IX X
+
+## BSPWM CONFIGURATION
+
+bspc config border_width        3 
+bspc config window_gap          5 
+
+bspc config focused_border_color "#000000"
+bspc config normal_border_color "#222222"
+
+#bspc config split_ratio          0.52
+#bspc config borderless_monocle   true
+#bspc config gapless_monocle      true
+
+
+
+
+
+
