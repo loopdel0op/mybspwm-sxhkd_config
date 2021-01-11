@@ -2,13 +2,62 @@
 # wm independent hotkeys
 #
 
+## PROTONVPN
+##super + F9
+##	~/.config/scripts/protonvpn-toggle/protonvpn_toggle.sh
+
+## REDSHIFT
+super + F1
+	~/.config/scripts/redshift-toggle/redshift_sxhkd.sh
+
+## AUDIO CONTROLS
+super + F3
+	pactl -- set-sink-volume 0 +10%	
+super + F2
+	pactl -- set-sink-volume 0 -10%
+super + F4
+	pactl -- set-sink-mute 0 toggle	
+
+## CMUS CONTROLS
+super + equal
+	cmus-remote --volume +10%
+super + minus
+	cmus-remote --volume -10%
+
+super + F7
+	cmus-remote --pause
+super + F8
+	cmus-remote --next
+super + F6
+	cmus-remote --prev
+
+## Screenshot
+super + u
+	xfce4-screenshooter
+# Firefox
+super + shift + Return
+	firefox
+## AUTO START
+super + F12
+	steam -silent
+super + F10
+	pkill -9 Discord && discord --start-minimized
+super + F11
+	discord --start-minimized	
+
 # terminal emulator
 super + Return
-	alacritty	
+	kitty	
+
+# DROP DOWN TERM
+super + backslash
+	xfce4-terminal --drop-down
+
 
 # program launcher
-super + d 
-	dmenu_run -nf '#BBBBBB' -nb '#000000' -sb '#2b2d2f' -sf '#EEEEEE' -fn 'monospace-10' -p 'dmenu prompt &gt;'
+super + d
+	rofi -show drun -theme solarized_alternate -font "hack 10" -combi-modi window,drun
+##	dmenu_run -nf '#BBBBBB' -nb '#000000' -sb '#2b2d2f' -sf '#EEEEEE' -fn 'monospace-10' -p 'dmenu prompt &gt;'
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -19,24 +68,24 @@ super + Escape
 #
 
 # quit/restart bspwm
-super + alt + {q,r}
-	bspc {quit,wm -r}
+super + alt + r
+	bspc wm -r
 
 # close and kill
 super + {_,shift + }q
 	bspc node -{c,k}
 
 # alternate between the tiled and monocle layout
-super + m
-	bspc desktop -l next
+#super + m
+#	bspc desktop -l next
 
 # send the newest marked node to the newest preselected node
-super + y
-	bspc node newest.marked.local -n newest.!automatic.local
+#super + y
+#	bspc node newest.marked.local -n newest.!automatic.local
 
 # swap the current node and the biggest node
-super + g
-	bspc node -s biggest
+#super + g
+#	bspc node -s biggest
 
 #
 # state/flags
