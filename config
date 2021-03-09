@@ -1,35 +1,44 @@
 [bar/primarybar]
 font-0 =	"Hack:size=8:antialias=true:2"
-height =	15
+height =	18
+
+bottom = true
 
 line-size = 2
+
+wm-restack = bspwm
 
 seperator = |
 spacing = 0
 
 module-margin = 1
 
-modules-left = title
-modules-center = date
-modules-right = pulseaudio workspaces
+modules-left = memory
+modules-center = date 
+modules-right = gpu-temperature gpumem-temperature cpu cpu-temperature
 
 [bar/secondarybar]
 font-0 =	"Hack:size=8:antialias=true:2"
-height =	15
-monitor =	HDMI-A-0
+height =	18
 
 module-margin = 1
 
-tray-maxsize = 16
-tray-scale = 0.8
-tray-offset-x = 0
-tray-offset-y = 0
-tray-padding = 0
-tray-detached = false
+tray-position = left
 
-modules-left = title
-modules-center = date
-modules-right = network gpu-temperature cpu cpu-temperature pulseaudio
+spacing = 0 
+
+line-size = 2
+
+#tray-maxsize = 16
+#tray-scale = 0.8
+#tray-offset-x = 0
+#tray-offset-y = 0
+tray-padding = 1
+#tray-detached = false
+
+modules-left = pulseaudio
+modules-center = title
+modules-right = workspaces
 
 [module/date]
 type = 		internal/date
@@ -114,7 +123,7 @@ label-empty-foreground = #000
 type = internal/bspwm
 
 ; Only show workspaces defined on the same output as the bar
-; NOTE: The bspwm and XRandR monitor names must match, which they do by default.
+; NOTE: The bspWM AND XRandR monitor names must match, which they do by default.
 ; But if you rename your bspwm monitors with bspc -n this option will no longer
 ; behave correctly.
 ; Default: true
@@ -163,7 +172,7 @@ hwmon-path = /sys/class/hwmon/hwmon0/temp1_input
 
 base-temperature = 20
 
-warn-temperature = 60
+warn-temperature = 90
 
 units = true
 
@@ -194,7 +203,7 @@ ramp-foreground = #55
 
 [module/network]
 type = internal/network
-interface = enp4s0
+interface = enp5s0
 
 label-connected = %local_ip%
 label-disconnected = disconnected
@@ -222,13 +231,78 @@ type = internal/temperature
 
 interval = 0.5
 
-thermal-zone = 0
+thermal-zone = 1
 
-hwmon-path = /sys/devices/pci0000:00/0000:00:01.0/0000:01:00.0/0000:02:00.0/0000:03:00.0/hwmon/hwmon3/temp1_input
+warn-temperature = 90
+
+hwmon-path = /sys/devices/pci0000:00/0000:00:03.1/0000:06:00.0/0000:07:00.0/0000:08:00.0/hwmon/hwmon2/temp1_input
 
 units = true
 
 format = <label>
 
 label = GTEMP %temperature-c%
+
+
+[module/gpumem-temperature]
+type = internal/temperature
+
+interval = 0.5
+
+thermal-zone = 0
+
+warn-temperature = 110
+
+hwmon-path = /sys/devices/pci0000:00/0000:00:03.1/0000:06:00.0/0000:07:00.0/0000:08:00.0/hwmon/hwmon2/temp3_input
+
+units = true
+
+format = <label>
+
+label = MEM %temperature-c%
+
+format-warn = <label-warn>
+
+label-warn = MEM %temperature-c%
+label-warn-foreground = #f00
+
+[module/memory]
+type = internal/memory
+
+interval = 3
+
+format = <label> <bar-used>
+
+label = RAM %gb_used%/%gb_free%
+
+bar-used-indicator =
+bar-used-width = 50
+bar-used-foreground-0 = #55aa55
+bar-used-foreground-1 = #557755
+bar-used-foreground-2 = #f5a70a
+bar-used-foreground-3 = #ff5555
+bar-used-fill = ▐
+bar-used-empty = ▐
+bar-used-empty-foreground = #444444
+
+; Only applies if <ramp-used> is used
+ramp-used-0 = ▁
+ramp-used-1 = ▂
+ramp-used-2 = ▃
+ramp-used-3 = ▄
+ramp-used-4 = ▅
+ramp-used-5 = ▆
+ramp-used-6 = ▇
+ramp-used-7 = █
+
+; Only applies if <ramp-free> is used
+ramp-free-0 = ▁
+ramp-free-1 = ▂
+ramp-free-2 = ▃
+ramp-free-3 = ▄
+ramp-free-4 = ▅
+ramp-free-5 = ▆
+ramp-free-6 = ▇
+ramp-free-7 = █
+
 
