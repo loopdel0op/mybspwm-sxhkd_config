@@ -2,13 +2,6 @@
 # wm independent hotkeys
 #
 
-## PROTONVPN
-##super + F9
-##	~/.config/scripts/protonvpn-toggle/protonvpn_toggle.sh
-
-## REDSHIFT
-super + F1
-	~/.config/scripts/redshift-toggle/redshift_sxhkd.sh
 
 ## AUDIO CONTROLS
 super + F3
